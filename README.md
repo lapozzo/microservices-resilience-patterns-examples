@@ -15,3 +15,7 @@ This project is compose of two simple applications: Customers and Orders, where 
 * Java 11
 * Springboot
 * Resilience4j
+
+### Resilience Patterns
+
+* Retry
