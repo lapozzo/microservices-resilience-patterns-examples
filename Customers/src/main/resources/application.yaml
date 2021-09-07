@@ -1,0 +1,9 @@
+resilience4j.retry:
+    instances:
+        getOrders:
+            maxAttempts: 3
+            waitDuration: 1s
+            enableExponentialBackoff: true
+            exponentialBackoffMultiplier: 2
+            ignoreExceptions:
+                - org.springframework.web.client.HttpClientErrorException.NotFound
