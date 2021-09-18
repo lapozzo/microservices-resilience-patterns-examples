@@ -8,7 +8,7 @@ Resiliency patterns are a type of service architecture that help to prevent casc
 
 ## Organization
 
-This project is compose of two simple applications: Customers and Orders, where Customers access Orders services. Because of this dependecy, the Customers project implement the resilience patterns.
+This project is compose of two simple applications: Customers and Orders, where Customers access Orders services. Because of this dependency, the Customers project implement the resilience patterns.
 
 ### Language and Frameworks
 
