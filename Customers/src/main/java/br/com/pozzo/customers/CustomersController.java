@@ -15,8 +15,8 @@ public class CustomersController {
 	@Autowired
 	private OrderService orderService;
 
-	@RequestMapping(value = "/customers/{id}")
-	public ResponseEntity<Customer> get(@PathVariable("id") int id) {
+	@RequestMapping(value = "/customers/with_retry/{id}")
+	public ResponseEntity<Customer> getWithRetry(@PathVariable("id") int id) {
 		try {
 			List<Order> customerOrders = orderService.getOrdersWithRetry(id);
 			return new ResponseEntity<Customer>(new Customer(id, "Customer #" + id, customerOrders), HttpStatus.OK);
@@ -24,4 +24,14 @@ public class CustomersController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
+	
+	@RequestMapping(value = "/customers/with_circuit/{id}")
+	public ResponseEntity<Customer> getWithCircuit(@PathVariable("id") int id) {
+		try {
+			List<Order> customerOrders = orderService.getOrdersWithCircuit(id);
+			return new ResponseEntity<Customer>(new Customer(id, "Customer #" + id, customerOrders), HttpStatus.OK);
+		} catch (NotFound e) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}	
 }

@@ -11,4 +11,10 @@ public class Order {
 
 	public Order() {
 	}
+
+	public Order(int orderId, double orderTotal) {
+		super();
+		this.orderId = orderId;
+		this.orderTotal = orderTotal;
+	}
 }

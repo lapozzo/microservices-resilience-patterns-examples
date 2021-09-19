@@ -4,4 +4,5 @@ import java.util.List;
 
 public interface OrderService {
 	public List<Order> getOrdersWithRetry(int customerId);
+	public List<Order> getOrdersWithCircuit(int customerId);
 }

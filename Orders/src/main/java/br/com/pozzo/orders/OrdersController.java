@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class OrdersController {
+	Logger logger = LoggerFactory.getLogger(OrdersController.class);
 	private static final Map<Integer, List<Order>> customerOrders = new HashMap<>();
 	private static final List<Order> allOrders = new ArrayList<>();
 
@@ -35,8 +38,10 @@ public class OrdersController {
 			throw new RuntimeException("Unexpected Error!");
 		}
 		if (!customerOrders.containsKey(customerId)) {
+			logger.info(String.format("Not found orders for customer %d", customerId));
 			return new ResponseEntity<List<Order>>(HttpStatus.NOT_FOUND);
 		}
+		logger.info(String.format("Found orders for customer %d", customerId));
 		return new ResponseEntity<List<Order>>(customerOrders.get(customerId), HttpStatus.OK);
 	}
 

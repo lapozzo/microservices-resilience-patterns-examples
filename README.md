@@ -6,9 +6,9 @@ The goal of this project is to implement some of the most common resilience patt
 
 Resiliency patterns are a type of service architecture that help to prevent cascading failures and to preserve functionality in the event of service failure.
 
-## Organization
+## Organization of the project
 
-This project is compose of two simple applications: Customers and Orders, where Customers access Orders services. Because of this dependency, the Customers project implement the resilience patterns.
+This project is composed of two simple applications: Customers and Orders, where Customers access Orders services to retrieve orders of the customer. Because of this dependency between the projects, the Customers project implement the resilience patterns to prevent failures and reduce the load in the Orders application.
 
 ### Language and Frameworks
 
@@ -19,3 +19,5 @@ This project is compose of two simple applications: Customers and Orders, where 
 ### Resilience Patterns
 
 * Retry
+* Circuit Breaker
+* Fallback Method

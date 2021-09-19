@@ -1,9 +1,27 @@
 resilience4j.retry:
-    instances:
-        getOrders:
+    configs:
+        default:
             maxAttempts: 3
             waitDuration: 1s
             enableExponentialBackoff: true
             exponentialBackoffMultiplier: 2
             ignoreExceptions:
                 - org.springframework.web.client.HttpClientErrorException.NotFound
+    instances:
+        getOrdersWithRetry:
+            baseConfig: default
+resilience4j.circuitbreaker:
+    configs:
+        default:
+            registerHealthIndicator: true
+            minimumNumberOfCalls: 4
+            permittedNumberOfCallsInHalfOpenState: 2
+            automaticTransitionFromOpenToHalfOpenEnabled: true
+            waitDurationInOpenState: 30s
+            failureRateThreshold: 20
+            slidingWindowSize: 10
+            ignoreExceptions:
+                - org.springframework.web.client.HttpClientErrorException.NotFound            
+    instances:
+        getOrdersWithCircuit:
+            baseConfig: default
