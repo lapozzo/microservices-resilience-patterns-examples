@@ -1,3 +1,16 @@
+management:
+  endpoints:
+    enabled-by-default: true
+    web:
+       exposure:
+          include: prometheus
+  endpoint:
+    info:
+      enabled: true
+  metrics:
+     export:
+        defaults:
+           enabled: true
 resilience4j.retry:
     configs:
         default:
@@ -24,4 +37,12 @@ resilience4j.circuitbreaker:
                 - org.springframework.web.client.HttpClientErrorException.NotFound            
     instances:
         getOrdersWithCircuit:
+            baseConfig: default
+resilience4j.bulkhead:
+    configs:
+        default:
+            maxWaitDuration: 1000ms
+            maxConcurrentCalls: 1
+    instances:
+        getOrdersWithBulkhead:
             baseConfig: default

@@ -33,5 +33,15 @@ public class CustomersController {
 		} catch (NotFound e) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-	}	
+	}
+	
+	@RequestMapping(value = "/customers/with_bulkhead/{id}")
+	public ResponseEntity<Customer> getWithBulkhead(@PathVariable("id") int id) {
+		try {
+			List<Order> customerOrders = orderService.getOrdersWithBulkhead(id);
+			return new ResponseEntity<Customer>(new Customer(id, "Customer #" + id, customerOrders), HttpStatus.OK);
+		} catch (NotFound e) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}		
 }

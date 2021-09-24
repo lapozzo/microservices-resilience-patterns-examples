@@ -21,3 +21,4 @@ This project is composed of two simple applications: Customers and Orders, where
 * Retry
 * Circuit Breaker
 * Fallback Method
+* Bulkhead
